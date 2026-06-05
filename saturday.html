@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>토요일 웹툰</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<a href="index.html" class="logo" style="text-decoration:none;">WEBTOON</a>
+
+<nav class="menu">
+<a href="index.html">홈</a>
+<a href="ranking.html">랭킹</a>
+<a href="new_webtoon.html">신작</a>
+<a href="end_webtoon.html">완결</a>
+</nav>
+<a href="login.html" class="login-btn" id="loginBtn">로그인</a>
+</div>
+</header>
+
+<section class="day-tabs">
+<div class="tabs">
+<a href="index.html">월</a>
+<a href="tuesday.html">화</a>
+<a href="wednesday.html">수</a>
+<a href="thursday.html">목</a>
+<a href="friday.html">금</a>
+<a href="saturday.html" class="active">토</a>
+<a href="sunday.html">일</a>
+</div>
+</section>
+
+<section class="banner">
+<div class="banner-box">
+<h1>토요일 웹툰</h1>
+<p>토요일 연재 작품</p>
+</div>
+</section>
+
+<main class="container">
+
+<h2 class="section-title">최신 업데이트순</h2>
+
+<div class="webtoon-grid" id="webtoonGrid"></div>
+
+</main>
+
+<footer>
+© 2026 WEBTOON PLATFORM
+</footer>
+
+<script>
+
+const webtoons = [
+
+{
+title:"신의 탑승자",
+author:"김태성",
+rating:"9.99",
+date:"2026-06-01",
+img:"https://picsum.photos/300/400?201"
+},
+
+{
+title:"무한 회귀자",
+author:"이민재",
+rating:"9.97",
+date:"2026-05-31",
+img:"https://picsum.photos/300/400?202"
+},
+
+{
+title:"SSS급 헌터",
+author:"박준혁",
+rating:"9.96",
+date:"2026-05-30",
+img:"https://picsum.photos/300/400?203"
+},
+
+{
+title:"최강 용사",
+author:"최도윤",
+rating:"9.94",
+date:"2026-05-29",
+img:"https://picsum.photos/300/400?204"
+},
+
+{
+title:"블랙 마법사",
+author:"정지훈",
+rating:"9.92",
+date:"2026-05-28",
+img:"https://picsum.photos/300/400?205"
+},
+
+{
+title:"아카데미 천재",
+author:"한민수",
+rating:"9.90",
+date:"2026-05-27",
+img:"https://picsum.photos/300/400?206"
+},
+
+{
+title:"멸망 이후",
+author:"윤서준",
+rating:"9.88",
+date:"2026-05-26",
+img:"https://picsum.photos/300/400?207"
+},
+
+{
+title:"차원의 문",
+author:"강현우",
+rating:"9.86",
+date:"2026-05-25",
+img:"https://picsum.photos/300/400?208"
+},
+
+{
+title:"전설의 기사",
+author:"송지환",
+rating:"9.84",
+date:"2026-05-24",
+img:"https://picsum.photos/300/400?209"
+},
+
+{
+title:"드래곤 워",
+author:"임정훈",
+rating:"9.82",
+date:"2026-05-23",
+img:"https://picsum.photos/300/400?210"
+},
+
+{
+title:"천공의 제왕",
+author:"장성민",
+rating:"9.80",
+date:"2026-05-22",
+img:"https://picsum.photos/300/400?211"
+}
+
+];
+
+webtoons.sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+);
+
+const grid = document.getElementById("webtoonGrid");
+
+webtoons.forEach((toon,index)=>{
+
+const card = document.createElement("div");
+
+card.className = "card";
+
+card.innerHTML = `
+${index < 3 ? '<div class="new-badge">NEW</div>' : ''}
+
+<img src="${toon.img}" class="thumbnail">
+
+<div class="card-body">
+<div class="title">${toon.title}</div>
+<div class="author">${toon.author}</div>
+<div class="rating">★ ${toon.rating}</div>
+<div class="upload-date">업데이트 : ${toon.date}</div>
+</div>
+`;
+
+grid.appendChild(card);
+
+});
+
+const loginBtn = document.getElementById("loginBtn");
+
+if(localStorage.getItem("isLogin") === "true"){
+
+    loginBtn.innerText = "로그아웃";
+
+    loginBtn.onclick = function(e){
+
+        e.preventDefault();
+
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("userId");
+
+        alert("로그아웃 되었습니다.");
+
+        location.reload();
+    };
+}
+
+</script>
+
+</body>
+</html>

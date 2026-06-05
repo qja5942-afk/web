@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웹툰 랭킹</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a href="index.html" class="logo" style="text-decoration:none;">WEBTOON</a>
+
+        <nav class="menu">
+            <a href="index.html">홈</a>
+            <a href="ranking.html">랭킹</a>
+            <a href="new_webtoon.html">신작</a>
+            <a href="end_webtoon.html">완결</a>
+        </nav>
+        <a href="login.html" class="login-btn" id="loginBtn">로그인</a>
+    </div>
+</header>
+
+<section class="banner">
+    <div class="banner-box">
+        <h1>신작 웹툰</h1>
+        <p>조회수 기준 인기 작품</p>
+    </div>
+</section>
+
+<main class="container">
+
+    <h2 class="section-title">랭킹 순위</h2>
+
+    <div class="webtoon-grid" id="webtoonGrid"></div>
+
+</main>
+
+<footer>
+    © 2026 WEBTOON PLATFORM
+</footer>
+
+<script>
+
+const webtoons = [
+
+{
+title:"신의 탑승자",
+author:"김태성",
+rating:"9.99",
+views:152340,
+date:"2026-06-01",
+img:"https://picsum.photos/300/400?201"
+},
+
+{
+title:"무한 회귀자",
+author:"이민재",
+rating:"9.97",
+views:98420,
+date:"2026-05-31",
+img:"https://picsum.photos/300/400?202"
+},
+
+{
+title:"SSS급 헌터",
+author:"박준혁",
+rating:"9.96",
+views:245810,
+date:"2026-05-30",
+img:"https://picsum.photos/300/400?203"
+},
+
+{
+title:"최강 용사",
+author:"최도윤",
+rating:"9.94",
+views:175330,
+date:"2026-05-29",
+img:"https://picsum.photos/300/400?204"
+},
+
+{
+title:"블랙 마법사",
+author:"정지훈",
+rating:"9.92",
+views:126450,
+date:"2026-05-28",
+img:"https://picsum.photos/300/400?205"
+},
+
+{
+title:"아카데미 천재",
+author:"한민수",
+rating:"9.90",
+views:212760,
+date:"2026-05-27",
+img:"https://picsum.photos/300/400?206"
+},
+
+{
+title:"멸망 이후",
+author:"윤서준",
+rating:"9.88",
+views:116430,
+date:"2026-05-26",
+img:"https://picsum.photos/300/400?207"
+},
+
+{
+title:"차원의 문",
+author:"강현우",
+rating:"9.86",
+views:163890,
+date:"2026-05-25",
+img:"https://picsum.photos/300/400?208"
+}
+
+];
+
+// 조회수 내림차순 정렬
+webtoons.sort((a,b) => b.views - a.views);
+
+const grid = document.getElementById("webtoonGrid");
+
+webtoons.forEach((toon,index)=>{
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+        <div class="rank">#${index + 1}</div>
+
+        <img src="${toon.img}" class="thumbnail">
+
+        <div class="card-body">
+            <div class="title">${toon.title}</div>
+            <div class="author">${toon.author}</div>
+            <div class="rating">★ ${toon.rating}</div>
+            <div class="views">조회수 ${toon.views.toLocaleString()}</div>
+            <div class="upload-date">업데이트 : ${toon.date}</div>
+        </div>
+    `;
+
+    grid.appendChild(card);
+
+});
+
+const loginBtn = document.getElementById("loginBtn");
+
+if(localStorage.getItem("isLogin") === "true"){
+
+    loginBtn.innerText = "로그아웃";
+
+    loginBtn.onclick = function(e){
+
+        e.preventDefault();
+
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("userId");
+
+        alert("로그아웃 되었습니다.");
+
+        location.reload();
+    };
+}
+
+</script>
+
+</body>
+</html>

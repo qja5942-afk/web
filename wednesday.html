@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>수요일 웹툰</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+<div class="header-inner">
+<a href="index.html" class="logo" style="text-decoration:none;">WEBTOON</a>
+
+<nav class="menu">
+<a href="index.html">홈</a>
+<a href="ranking.html">랭킹</a>
+<a href="new_webtoon.html">신작</a>
+<a href="end_webtoon.html">완결</a>
+</nav>
+<a href="login.html" class="login-btn" id="loginBtn">로그인</a>
+</div>
+</header>
+
+<section class="day-tabs">
+<div class="tabs">
+<a href="index.html">월</a>
+<a href="tuesday.html">화</a>
+<a href="wednesday.html" class="active">수</a>
+<a href="thursday.html">목</a>
+<a href="friday.html">금</a>
+<a href="saturday.html">토</a>
+<a href="sunday.html">일</a>
+</div>
+</section>
+
+<section class="banner">
+<div class="banner-box">
+<h1>수요일 웹툰</h1>
+<p>수요일 연재 작품</p>
+</div>
+</section>
+
+<main class="container">
+
+<h2 class="section-title">최신 업데이트순</h2>
+
+<div class="webtoon-grid" id="webtoonGrid"></div>
+
+</main>
+
+<footer>
+© 2026 WEBTOON PLATFORM
+</footer>
+
+<script>
+
+const webtoons = [
+
+{
+title:"신의 검",
+author:"김민준",
+rating:"9.99",
+date:"2026-06-01",
+img:"https://picsum.photos/300/400?601",
+link:"webtoons/detail1.html"
+},
+
+{
+title:"초월자 아카데미",
+author:"이도윤",
+rating:"9.97",
+date:"2026-05-31",
+img:"https://picsum.photos/300/400?602",
+link:"webtoons/detail2.html"
+},
+
+{
+title:"무한 회귀 헌터",
+author:"박서준",
+rating:"9.95",
+date:"2026-05-30",
+img:"https://picsum.photos/300/400?603",
+link:"webtoons/detail3.html"
+},
+
+{
+title:"마왕의 계약서",
+author:"최지훈",
+rating:"9.93",
+date:"2026-05-29",
+img:"https://picsum.photos/300/400?604",
+link:"webtoons/detail4.html"
+},
+
+{
+title:"용사의 귀환",
+author:"정현우",
+rating:"9.91",
+date:"2026-05-28",
+img:"https://picsum.photos/300/400?605",
+link:"webtoons/detail5.html"
+}
+
+];
+
+webtoons.sort((a,b)=>
+new Date(b.date) - new Date(a.date)
+);
+
+const grid = document.getElementById("webtoonGrid");
+
+webtoons.forEach((toon,index)=>{
+
+const card = document.createElement("div");
+card.className = "card";
+
+card.innerHTML = `
+<a href="${toon.link}" style="text-decoration:none;color:inherit;display:block;">
+
+${index < 3 ? '<div class="new-badge">NEW</div>' : ''}
+
+<img src="${toon.img}" class="thumbnail">
+
+<div class="card-body">
+<div class="title">${toon.title}</div>
+<div class="author">${toon.author}</div>
+<div class="rating">★ ${toon.rating}</div>
+<div class="upload-date">업데이트 : ${toon.date}</div>
+</div>
+
+</a>
+`;
+
+grid.appendChild(card);
+
+});
+
+const loginBtn = document.getElementById("loginBtn");
+
+if(localStorage.getItem("isLogin") === "true"){
+
+    loginBtn.innerText = "로그아웃";
+
+    loginBtn.onclick = function(e){
+
+        e.preventDefault();
+
+        localStorage.removeItem("isLogin");
+        localStorage.removeItem("userId");
+
+        alert("로그아웃 되었습니다.");
+
+        location.reload();
+    };
+}
+
+</script>
+
+</body>
+</html>
