@@ -171,6 +171,9 @@ footer{
 
 .card{
     position:relative;
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
 }
 
 .new-badge{
@@ -231,4 +234,21 @@ footer{
 
 .login-btn:hover{
     background:#00c258;
+}
+
+.end-badge{
+    position:absolute;
+    top:10px;
+    right:10px;
+
+    background:#ff4d4f;
+    color:white;
+
+    padding:5px 10px;
+    border-radius:8px;
+
+    font-size:12px;
+    font-weight:700;
+
+    z-index:10;
 }
